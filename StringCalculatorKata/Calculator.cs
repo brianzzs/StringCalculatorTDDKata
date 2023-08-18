@@ -15,6 +15,12 @@ public class StringCalculator
         if (numbersContainsNewLine)
             numbers = numbers.Replace("\n", ",");
 
+
+        var negativeNumbers = numbers.Split(',').Where(x => int.Parse(x) < 0).ToList();
+
+        if (negativeNumbers.Any())
+            throw new Exception($"Negatives not allowed: {string.Join(",", negativeNumbers)}");
+            
         if (numbersContainsComma)
         {
             var numbersArray = numbers.Split(',');
